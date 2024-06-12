@@ -1,0 +1,111 @@
+// Definimos los parámetros del cono
+radio_base = 10;
+altura = 20;
+// Funcion que crea el cono
+cylinder(h = altura, r1 = radio_base, r2 = 0);
+(anda)
+----------------------------------------------
+// Parámetros del elipsoide
+radio_x = 15;
+radio_y = 20;
+radio_z = 10;
+
+// Crear el elipsoide
+scale([radio_x, radio_y, radio_z])
+    sphere();
+(ver)
+----------------------------------------------
+//Definimos los parámetros de la esfera
+radio = 15;
+
+//Funcion que crea la esfera
+sphere(r = radio);
+(anda)
+----------------------------------------------
+// Parámetros del hiperboloide
+a = 10;
+b = 5;
+c = 20;
+altura = 30;
+
+// Crear el hiperboloide de una hoja
+module hiperboloide() {
+    surface(s = [a, b, c]) {
+        parametric([u, v], [a * cos(u), b * sin(u), c * sqrt(1 + (u/v)^2)]);
+    }
+}
+
+// Mostrar el hiperboloide
+hiperboloide();
+----------------------------------------------
+// Parámetros del hiperboloide
+a = 10;
+b = 5;
+c = 20;
+altura = 30;
+
+// Crear el hiperboloide de una hoja
+module hiperboloide_una_hoja() {
+    surface(s = [a, b, c]) {
+        parametric([u, v], [a * cos(u), b * sin(u), c * sqrt(1 + (u/v)^2)]);
+    }
+}
+
+// Crear el hiperboloide de dos hojas
+module hiperboloide_dos_hojas() {
+    union() {
+        hiperboloide_una_hoja();
+        mirror([0, 0, 1])
+            hiperboloide_una_hoja();
+    }
+}
+
+// Mostrar el hiperboloide de dos hojas
+hiperboloide_dos_hojas();
+----------------------------------------------
+// Parámetros del cono elíptico
+radio_x = 15;
+radio_y = 10;
+altura = 20;
+
+// Crear el cono elíptico
+module cono_eliptico() {
+    rotate_extrude() {
+        scale([radio_x, radio_y])
+            circle(1);
+    }
+}
+
+// Mostrar el cono elíptico
+cono_eliptico();
+----------------------------------------------
+// Parámetros del paraboloide elíptico
+a = 10;
+b = 5;
+altura = 20;
+
+// Crear el paraboloide elíptico
+module paraboloide_eliptico() {
+    surface(s = [a, b]) {
+        parametric([u, v], [u, v, (u^2/a^2 + v^2/b^2) * altura]);
+    }
+}
+
+// Mostrar el paraboloide elíptico
+paraboloide_eliptico();
+----------------------------------------------
+// Parámetros del paraboloide hiperbólico
+a = 10;
+b = 5;
+altura = 20;
+
+// Crear el paraboloide hiperbólico
+module paraboloide_hiperbolico() {
+    surface(s = [a, b]) {
+        parametric([u, v], [u, v, (u^2/a^2 - v^2/b^2) * altura]);
+    }
+}
+
+// Mostrar el paraboloide hiperbólico
+paraboloide_hiperbolico();
+----------------------------------------------
